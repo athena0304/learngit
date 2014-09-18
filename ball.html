@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa;display:block;margin:auto">
+</canvas>
+<script>
+
+    var ball = {
+        x:800,
+        y:50,
+        r:15,
+        g:2,
+        vx:-4,
+        vy:0,
+        color:"#005588"
+    };
+
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 1024;
+        canvas.height = 600;
+
+        var context = canvas.getContext("2d");
+
+        setInterval(function(){
+            render(context);//显示时间
+            update();
+        },50);
+
+
+    };
+
+
+    function update(){
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+        ball.vy += ball.g;
+
+        if(ball.y >= 600 - ball.r){
+            ball.y = 600 - ball.r;
+            ball.vy = -0.8*ball.vy;
+        }
+
+    }
+
+    function render(cxt){
+
+        //刷新屏幕
+        cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
+
+        cxt.fillStyle = ball.color;
+        cxt.beginPath();
+        cxt.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
+        cxt.closePath();
+
+        cxt.fill();
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
